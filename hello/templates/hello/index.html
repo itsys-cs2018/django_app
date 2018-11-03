@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<title>{{title}}</title>
+</head>
+<body>
+	<h1>{{title}}</h1>
+	<p>{{msg}}</p>
+
+    <!-- idの値を入力するフォームを表示 -->
+ <form action="{% url 'index' %}" method="post">
+		{% csrf_token %}
+		{{ form }}
+        <input type="submit" value="click">
+ 	</form>
+
+	<!-- Friendテーブルのレコードをすべて表示する -->
+	<table>
+		<!--  テーブルの見出し -->
+		<tr>
+			<th>ID</th>
+			<th>NAME</th>
+			<th>GENDER</th>
+			<th>MAIL</th>
+			<th>AGE</th>
+			<th>BIRTHDAY</th>
+		</tr>
+		<!-- data の要素を一つずつ item に代入するループ -->
+		{% for item in data %}
+		<tr>
+			<td>{{item.id}}</td>
+			<td>{{item.name}}</td>
+			<td>{% if item.gender == False %}男{% endif %}
+			    {% if item.gender == True %}女{% endif %}</td>
+			<td>{{item.mail}}</td>
+			<td>{{item.age}}</td>
+			<td>{{item.birthday}}</td>
+		</tr>
+		{% endfor %}
+	</table>
+	<!-- idを入力する -->
+</body>
+</html>
